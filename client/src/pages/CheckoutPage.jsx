@@ -25,7 +25,7 @@ const CheckoutPage = () => {
             data : {
               list_items : cartItemsList,
               addressId : addressList[selectAddress]?._id,
-              subTotalAmt : totalPrice,
+              subTotalAmt : totalQty,
               totalAmt :  totalPrice,
             }
           })
@@ -63,7 +63,7 @@ const CheckoutPage = () => {
             data : {
               list_items : cartItemsList,
               addressId : addressList[selectAddress]?._id,
-              subTotalAmt : totalPrice,
+              subTotalAmt : totalQty,
               totalAmt :  totalPrice,
             }
         })

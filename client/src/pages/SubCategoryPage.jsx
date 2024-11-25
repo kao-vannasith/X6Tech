@@ -71,8 +71,8 @@ const SubCategoryPage = () => {
         </div>
       }
     }),
-    columnHelper.accessor("category",{
-       header : "Category",
+    columnHelper.accessor("บริษัท",{
+       header : "บริษัท",
        cell : ({row})=>{
         return(
           <>
@@ -132,8 +132,8 @@ const SubCategoryPage = () => {
   return (
     <section className=''>
         <div className='p-2   bg-white shadow-md flex items-center justify-between'>
-            <h2 className='font-semibold'>Sub Category</h2>
-            <button onClick={()=>setOpenAddSubCategory(true)} className='text-sm border border-primary-200 hover:bg-primary-200 px-3 py-1 rounded'>Add Sub Category</button>
+            <h2 className='font-semibold'>Category</h2>
+            <button onClick={()=>setOpenAddSubCategory(true)} className='text-sm border border-primary-200 hover:bg-primary-200 px-3 py-1 rounded'>Add Category</button>
         </div>
 
         <div className='overflow-auto w-full max-w-[95vw]'>

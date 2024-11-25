@@ -52,7 +52,7 @@ const AddAddress = ({close}) => {
             </div>
             <form className='mt-4 grid gap-4' onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid gap-1'>
-                    <label htmlFor='addressline'>Address Line :</label>
+                    <label htmlFor='addressline'>ชื่อขนส่ง :</label>
                     <input
                         type='text'
                         id='addressline' 
@@ -61,7 +61,7 @@ const AddAddress = ({close}) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='city'>City :</label>
+                    <label htmlFor='city'>สาขา :</label>
                     <input
                         type='text'
                         id='city' 
@@ -70,7 +70,7 @@ const AddAddress = ({close}) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='state'>State :</label>
+                    <label htmlFor='state'>แขวง :</label>
                     <input
                         type='text'
                         id='state' 
@@ -79,7 +79,7 @@ const AddAddress = ({close}) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='pincode'>Pincode :</label>
+                    <label htmlFor='pincode'>URL facebook :</label>
                     <input
                         type='text'
                         id='pincode' 
@@ -88,7 +88,7 @@ const AddAddress = ({close}) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='country'>Country :</label>
+                    <label htmlFor='country'>Remark :</label>
                     <input
                         type='text'
                         id='country' 

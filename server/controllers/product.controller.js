@@ -283,7 +283,7 @@ export const searchProduct = async(request,response)=>{
         } : {}
 
         const skip = ( page - 1) * limit
-
+        console.log(query)
         const [data,dataCount] = await Promise.all([
             ProductModel.find(query).sort({ createdAt  : -1 }).skip(skip).limit(limit).populate('category subCategory'),
             ProductModel.countDocuments(query)

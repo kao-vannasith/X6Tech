@@ -19,7 +19,7 @@ import mongoose from "mongoose";
                     image : el.productId.image
                 } ,
                 paymentId : "",
-                payment_status : "CASH ON DELIVERY",
+                payment_status : "เก็บปายทาง",
                 delivery_address : addressId ,
                 subTotalAmt  : subTotalAmt,
                 totalAmt  :  totalAmt,
@@ -192,10 +192,18 @@ export async function getOrderDetailsController(request,response){
         const userId = request.userId // order id
 
         const orderlist = await OrderModel.find({ userId : userId }).sort({ createdAt : -1 }).populate('delivery_address')
-
+        const count = await OrderModel.aggregate([
+            {  $group: { 
+                _id: null, 
+                total: { 
+                    $sum: "$totalAmt" 
+                } 
+            }  }
+          ]);
         return response.json({
             message : "order list",
             data : orderlist,
+            totalAll : count,
             error : false,
             success : true
         })

@@ -518,3 +518,21 @@ export async function userDetails(request,response){
         })
     }
 }
+// get user all
+export async function userAll(request,response) {
+    try {
+        const user = await UserModel.find().sort({ createdAt : -1 })
+        return response.json({
+            message : 'user all',
+            data : user,
+            error : false,
+            success : true
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : "Something is wrong",
+            error : true,
+            success : false
+        })
+    }
+}

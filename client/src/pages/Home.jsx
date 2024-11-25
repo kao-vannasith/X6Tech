@@ -1,15 +1,19 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import banner from '../assets/banner.jpg'
 import bannerMobile from '../assets/banner-mobile.jpg'
 import { useSelector } from 'react-redux'
 import { valideURLConvert } from '../utils/valideURLConvert'
-import {Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay'
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const Home = () => {
   const loadingCategory = useSelector(state => state.product.loadingCategory)
   const categoryData = useSelector(state => state.product.allCategory)
   const subCategoryData = useSelector(state => state.product.allSubCategory)
+  const counts = useSelector(state => state.orders.count)
+  const orders = useSelector(state => state.orders.order)
   const navigate = useNavigate()
 
   const handleRedirectProductListpage = (id,cat)=>{
@@ -31,8 +35,63 @@ const Home = () => {
   return (
    <section className='bg-white'>
       <div className='container mx-auto'>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+        <div className="flex p-4">
+         
+          <h3 className="ml-2 text-sm font-medium">Order Show</h3>
+        </div>
+        <p
+          className={`
+            truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+        >
+          {subCategoryData.length}
+        </p>
+      </div>
+      {counts.map((order,index)=>{
+            return(
+      <div key={index+'orders'} className="rounded-xl bg-gray-50 p-2 shadow-sm">
+        <div className="flex p-4">
+         
+          <h3 className="ml-2 text-sm font-medium">Total All</h3>
+        </div>
+        <p
+          className={`
+            truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+        >
+          {order?.total}
+        </p>
+      </div>
+ )
+})
+}
+      <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+        <div className="flex p-4">
+         
+          <h3 className="ml-2 text-sm font-medium">Company </h3>
+        </div>
+        <p
+          className={`
+            truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+        >
+          {categoryData.length}
+        </p>
+      </div>
+      <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+        <div className="flex p-4">
+         
+          <h3 className="ml-2 text-sm font-medium">Total Order </h3>
+        </div>
+        <p
+          className={`
+            truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+        >
+          {orders.length}
+        </p>
+      </div>
+      </div>
           <div className={`w-full h-full min-h-48 bg-blue-100 rounded ${!banner && "animate-pulse my-2" } `}>
-              <img
+              {/* <img
                 src={banner}
                 className='w-full h-full hidden lg:block'
                 alt='banner' 
@@ -41,7 +100,16 @@ const Home = () => {
                 src={bannerMobile}
                 className='w-full h-full lg:hidden'
                 alt='banner' 
-              />
+              /> */}
+              <BarChart
+      series={[
+        { data: [2, 2, 8] },
+       
+      ]}
+      height={290}
+      xAxis={[{ data: ['Order Show', 'Company', 'Total Order'], scaleType: 'band' }]}
+      margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+    />
           </div>
       </div>
       
@@ -57,7 +125,7 @@ const Home = () => {
                 )
               })
             ) : (
-              categoryData.map((cat,index)=>{
+              categoryData.map((cat)=>{
                 return(
                   <div key={cat._id+"displayCategory"} className='w-full h-full' onClick={()=>handleRedirectProductListpage(cat._id,cat.name)}>
                     <div>
@@ -76,7 +144,7 @@ const Home = () => {
 
       {/***display category product */}
       {
-        categoryData?.map((c,index)=>{
+        categoryData?.map((c)=>{
           return(
             <CategoryWiseProductDisplay 
               key={c?._id+"CategorywiseProduct"} 

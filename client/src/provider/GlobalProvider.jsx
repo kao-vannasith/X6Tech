@@ -7,7 +7,7 @@ import AxiosToastError from "../utils/AxiosToastError";
 import toast from "react-hot-toast";
 import { pricewithDiscount } from "../utils/PriceWithDiscount";
 import { handleAddAddress } from "../store/addressSlice";
-import { setOrder } from "../store/orderSlice";
+import { setOrder, setCount } from "../store/orderSlice";
 
 export const GlobalContext = createContext(null)
 
@@ -113,7 +113,7 @@ const GlobalProvider = ({children}) => {
           dispatch(handleAddAddress(responseData.data))
         }
       } catch (error) {
-          // AxiosToastError(error)
+          console.log(error)
       }
     }
     const fetchOrder = async()=>{
@@ -125,6 +125,7 @@ const GlobalProvider = ({children}) => {
 
         if(responseData.success){
             dispatch(setOrder(responseData.data))
+            dispatch(setCount(responseData.totalAll))
         }
       } catch (error) {
         console.log(error)

@@ -24,9 +24,19 @@ const MyOrders = () => {
                   <div className='flex gap-3'>
                     <img
                       src={order.product_details.image[0]} 
-                      className='w-14 h-14'
+                      className='w-20 h-34'
                     />  
-                    <p className='font-medium'>{order.product_details.name}</p>
+                    <div>
+                      <p className='font-medium'>สินค้า: {order.product_details.name}</p>
+                      <p className='font-medium'>ขนส่ง: {order.delivery_address?.address_line}</p>
+                      <p className='font-medium'>สถานะ: {order.payment_status}</p>
+                      <p className='font-medium'>จำนวน: {order.subTotalAmt}</p>
+                      <p className='font-medium'>ราคา: {order.totalAmt}</p>
+                      <p className='font-medium'>Url: {order.delivery_address?.pincode}</p>
+                      <p className='font-medium'>เบีโทร: {order.delivery_address?.mobile}</p>
+                      {/* <p className='font-medium'>{order.delivery_address.city}</p> */}
+                    </div>
+                    
                   </div>
               </div>
             )
