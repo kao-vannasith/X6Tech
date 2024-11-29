@@ -36,7 +36,7 @@ const Home = () => {
    <section className='bg-white'>
       <div className='container mx-auto'>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+      <div className="rounded-xl bg-gray-200 p-2 shadow-sm">
         <div className="flex p-4">
          
           <h3 className="ml-2 text-sm font-medium">Order Show</h3>
@@ -50,7 +50,7 @@ const Home = () => {
       </div>
       {counts.map((order,index)=>{
             return(
-      <div key={index+'orders'} className="rounded-xl bg-gray-50 p-2 shadow-sm">
+      <div key={index+'orders'} className="rounded-xl bg-gray-200 p-2 shadow-sm">
         <div className="flex p-4">
          
           <h3 className="ml-2 text-sm font-medium">Total All</h3>
@@ -65,7 +65,7 @@ const Home = () => {
  )
 })
 }
-      <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+      <div className="rounded-xl bg-gray-200 p-2 shadow-sm">
         <div className="flex p-4">
          
           <h3 className="ml-2 text-sm font-medium">Company </h3>
@@ -77,7 +77,7 @@ const Home = () => {
           {categoryData.length}
         </p>
       </div>
-      <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+      <div className="rounded-xl bg-gray-200 p-2 shadow-sm">
         <div className="flex p-4">
          
           <h3 className="ml-2 text-sm font-medium">Total Order </h3>

@@ -4,7 +4,7 @@ import Loading from '../components/Loading'
 import NoData from '../components/NoData'
 import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
-import EditCategory from '../components/EditCategory'
+import EditUser from '../components/EditUser'
 import CofirmBox from '../components/CofirmBox'
 import toast from 'react-hot-toast'
 import AxiosToastError from '../utils/AxiosToastError'
@@ -100,6 +100,7 @@ const CategoryPage = () => {
         <p className='text-ellipsis line-clamp-2 font-medium'>{category?.email}</p>
         <p className='text-ellipsis line-clamp-2 font-medium'>{category?.mobile}</p>
         <p className='text-ellipsis line-clamp-2 font-medium'>{category?.role}</p>
+        <p className='text-ellipsis line-clamp-2 font-medium'>status: เช้า</p>
         
                             <div className='items-center h-9 flex gap-2'>
                             
@@ -136,7 +137,7 @@ const CategoryPage = () => {
 
         {
             openEdit && (
-                <EditCategory data={editData} close={()=>setOpenEdit(false)} fetchData={fetchCategory}/>
+                <EditUser data={editData} close={()=>setOpenEdit(false)} fetchData={fetchCategory}/>
             )
         }
 

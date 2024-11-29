@@ -23,7 +23,7 @@ const CardProduct = ({data}) => {
                 className='w-full h-full object-scale-down lg:scale-125'
             />
       </div>
-      <div className='flex items-center gap-1'>
+      {/* <div className='flex items-center gap-1'>
         <div className='rounded text-xs w-fit p-[1px] px-2 text-green-600 bg-green-50'>
               10 min 
         </div>
@@ -34,9 +34,12 @@ const CardProduct = ({data}) => {
               )
             }
         </div>
-      </div>
+      </div> */}
       <div className='px-2 lg:px-0 font-medium text-ellipsis text-sm lg:text-base line-clamp-2'>
         {data.name}
+      </div>
+      <div className='px-2 lg:px-0 font-medium text-ellipsis text-sm lg:text-base line-clamp-2'>
+        Stock: {data.stock}
       </div>
       <div className='w-fit gap-1 px-2 lg:px-0 text-sm lg:text-base'>
         {data.unit} 
@@ -46,7 +49,7 @@ const CardProduct = ({data}) => {
       <div className='px-2 lg:px-0 flex items-center justify-between gap-1 lg:gap-3 text-sm lg:text-base'>
         <div className='flex items-center gap-1'>
           <div className='font-semibold'>
-              {DisplayPriceInRupees(pricewithDiscount(data.price,data.discount))} 
+              {(pricewithDiscount(data.price,data.discount))} 
           </div>
           
           

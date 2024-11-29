@@ -126,7 +126,7 @@ const ProductDisplayPage = () => {
 
 
         <div className='p-4 lg:pl-7 text-base lg:text-lg'>
-            <p className='bg-green-300 w-fit px-2 rounded-full'>10 Min</p>
+            {/* <p className='bg-green-300 w-fit px-2 rounded-full'>10 Min</p> */}
             <h2 className='text-lg font-semibold lg:text-3xl'>{data.name}</h2>  
             <p className=''>{data.unit}</p> 
             <Divider/>
@@ -134,18 +134,18 @@ const ProductDisplayPage = () => {
               <p className=''>Price</p> 
               <div className='flex items-center gap-2 lg:gap-4'>
                 <div className='border border-green-600 px-4 py-2 rounded bg-green-50 w-fit'>
-                    <p className='font-semibold text-lg lg:text-xl'>{DisplayPriceInRupees(pricewithDiscount(data.price,data.discount))}</p>
+                    <p className='font-semibold text-lg lg:text-xl'>{((data.price,data.discount))}</p>
                 </div>
-                {
+                {/* {
                   data.discount && (
-                    <p className='line-through'>{DisplayPriceInRupees(data.price)}</p>
+                    <p className='line-through'>{(data.price)}</p>
                   )
                 }
                 {
                   data.discount && (
                     <p className="font-bold text-green-600 lg:text-2xl">{data.discount}% <span className='text-base text-neutral-500'>Discount</span></p>
                   )
-                }
+                } */}
                 
               </div>
 
@@ -164,7 +164,7 @@ const ProductDisplayPage = () => {
               }
            
 
-            <h2 className='font-semibold'>Why shop from X6Tech? </h2>
+            {/* <h2 className='font-semibold'>Why shop from X6Tech? </h2>
             <div>
                   <div className='flex  items-center gap-4 my-4'>
                       <img
@@ -199,7 +199,7 @@ const ProductDisplayPage = () => {
                         <p>Choose from 5000+ products across food personal care, household & other categories.</p>
                       </div>
                   </div>
-            </div>
+            </div> */}
 
             {/****only mobile */}
             <div className='my-4 grid gap-3 '>

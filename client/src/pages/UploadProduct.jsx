@@ -227,7 +227,7 @@ const UploadProduct = () => {
 
                 </div>
                 <div className='grid gap-1'>
-                  <label className='font-medium'>Category</label>
+                  <label className='font-medium'>บริษัท</label>
                   <div>
                     <select
                       className='bg-blue-50 border w-full p-2 rounded'
@@ -245,7 +245,7 @@ const UploadProduct = () => {
                         setSelectCategory("")
                       }}
                     >
-                      <option value={""}>Select Category</option>
+                      <option value={""}>Select บริษัท</option>
                       {
                         allCategory.map((c,index)=>{
                           return(
@@ -271,7 +271,7 @@ const UploadProduct = () => {
                   </div>
                 </div>
                 <div className='grid gap-1'>
-                  <label className='font-medium'>Sub Category</label>
+                  <label className='font-medium'>Category</label>
                   <div>
                     <select
                       className='bg-blue-50 border w-full p-2 rounded'
@@ -289,7 +289,7 @@ const UploadProduct = () => {
                         setSelectSubCategory("")
                       }}
                     >
-                      <option value={""} className='text-neutral-600'>Select Sub Category</option>
+                      <option value={""} className='text-neutral-600'>Select Category</option>
                       {
                         allSubCategory.map((c,index)=>{
                           return(

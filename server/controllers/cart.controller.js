@@ -1,11 +1,12 @@
 import CartProductModel from "../models/cartproduct.model.js";
 import UserModel from "../models/user.model.js";
+import ProductModel from "../models/product.model.js";
 
 export const addToCartItemController = async(request,response)=>{
     try {
         const  userId = request.userId
-        const { productId } = request.body
-        
+        const { productId , stock } = request.body
+        console.log(request.body)
         if(!productId){
             return response.status(402).json({
                 message : "Provide productId",
@@ -31,7 +32,11 @@ export const addToCartItemController = async(request,response)=>{
             productId : productId
         })
         const save = await cartItem.save()
-
+        await ProductModel.updateOne({_id : productId},{
+            $set:{
+                stock: stock-1
+            } 
+        })
         const updateCartUser = await UserModel.updateOne({ _id : userId},{
             $push : { 
                 shopping_cart : productId

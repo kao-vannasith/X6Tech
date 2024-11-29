@@ -69,7 +69,7 @@ const UploadCategoryModel = ({close, fetchData}) => {
     <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
         <div className='bg-white max-w-4xl w-full p-4 rounded'>
             <div className='flex items-center justify-between'>
-                <h1 className='font-semibold'>Category</h1>
+                <h1 className='font-semibold'>บริษัท</h1>
                 <button onClick={close} className='w-fit block ml-auto'>
                     <IoClose size={25}/>
                 </button>
@@ -122,7 +122,7 @@ const UploadCategoryModel = ({close, fetchData}) => {
                     py-2    
                     font-semibold 
                     `}
-                >Add Category</button>
+                >Add บริษัท</button>
             </form>
         </div>
     </section>

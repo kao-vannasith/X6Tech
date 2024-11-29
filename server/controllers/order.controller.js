@@ -190,8 +190,14 @@ export async function webhookStripe(request,response){
 export async function getOrderDetailsController(request,response){
     try {
         const userId = request.userId // order id
-
-        const orderlist = await OrderModel.find({ userId : userId }).sort({ createdAt : -1 }).populate('delivery_address')
+        // let { search } = request.body
+        // const query = search ? {
+        //     $text : {
+        //         $search : search
+        //     }
+        // } : {}
+        if(userId === '673d2ca8d62befa9aa08b44b'){
+            const orderlist = await OrderModel.find().sort({ createdAt : -1 }).populate(['delivery_address','userId'])
         const count = await OrderModel.aggregate([
             {  $group: { 
                 _id: null, 
@@ -200,13 +206,36 @@ export async function getOrderDetailsController(request,response){
                 } 
             }  }
           ]);
-        return response.json({
+          return response.json({
             message : "order list",
             data : orderlist,
             totalAll : count,
             error : false,
             success : true
         })
+        } else {
+            const ObjectId = mongoose.Types.ObjectId;
+            const orderlist = await OrderModel.find({ userId : userId }).sort({ createdAt : -1 }).populate(['delivery_address','userId'])
+        const count = await OrderModel.aggregate([
+            // {
+            //     $match: { _id: new ObjectId('673d3c39d62befa9aa08b7b0') }
+            //   },
+            {  $group: { 
+                _id: userId, 
+                total: { 
+                    $sum: "$totalAmt" 
+                } 
+            }  }
+          ]);
+          return response.json({
+            message : "order list",
+            data : orderlist,
+            totalAll : count,
+            error : false,
+            success : true
+        })
+        }
+        
     } catch (error) {
         return response.status(500).json({
             message : error.message || error,

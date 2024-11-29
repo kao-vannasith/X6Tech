@@ -26,7 +26,8 @@ const AddToCartButton = ({ data }) => {
             const response = await Axios({
                 ...SummaryApi.addTocart,
                 data: {
-                    productId: data?._id
+                    productId: data?._id,
+                    stock: data?.stock
                 }
             })
 
