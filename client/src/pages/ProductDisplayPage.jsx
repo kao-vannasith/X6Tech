@@ -134,18 +134,18 @@ const ProductDisplayPage = () => {
               <p className=''>Price</p> 
               <div className='flex items-center gap-2 lg:gap-4'>
                 <div className='border border-green-600 px-4 py-2 rounded bg-green-50 w-fit'>
-                    <p className='font-semibold text-lg lg:text-xl'>{((data.price,data.discount))}</p>
+                    <p className='font-semibold text-lg lg:text-xl'>{DisplayPriceInRupees(pricewithDiscount(data.price,data.discount))}</p>
                 </div>
-                {/* {
+                {
                   data.discount && (
-                    <p className='line-through'>{(data.price)}</p>
+                    <p className='line-through'>{DisplayPriceInRupees(data.price)}</p>
                   )
                 }
                 {
                   data.discount && (
                     <p className="font-bold text-green-600 lg:text-2xl">{data.discount}% <span className='text-base text-neutral-500'>Discount</span></p>
                   )
-                } */}
+                }
                 
               </div>
 

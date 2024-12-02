@@ -3,17 +3,36 @@ import { useSelector } from 'react-redux'
 import NoData from '../components/NoData'
 import { IoSearchOutline } from "react-icons/io5";
 import isAdmin from '../utils/isAdmin'
+import Axios from '../utils/Axios';
+import SummaryApi from '../common/SummaryApi';
+import AxiosToastError from '../utils/AxiosToastError';
 
 const MyOrders = () => {
   const orders = useSelector(state => state.orders.order)
   const user = useSelector((state)=> state.user)
+  const handleSubmit = async()=>{
+    try {
+        await Axios({
+            ...SummaryApi.getOrderExcel,
+        })
+        
 
-  console.log("order Items",orders)
+    } catch (error) {
+        AxiosToastError(error)
+    }
+
+
+
+}
+
   return (
     <div>
       <div className='p-2  bg-white shadow-md flex items-center justify-between gap-4'>
         <h1 className='font-semibold'>Order</h1>
-        <button className='font-semibold text-green-700 hover:text-green-800'>Export Excel</button>
+        
+        <button onClick={()=>
+                              handleSubmit()
+                            } className='font-semibold text-green-700 hover:text-green-800'>Export Excel</button>
         <div className='h-full min-w-24 max-w-56 w-full ml-auto bg-blue-50 px-4 flex items-center gap-3 py-2 rounded  border focus-within:border-primary-200'>
                   <IoSearchOutline size={25}/>
                   <input
@@ -60,7 +79,7 @@ const MyOrders = () => {
                       <p className='font-medium'>ราคา: {order.totalAmt}</p>
                       <p className='font-medium'>Url: {order.delivery_address?.pincode}</p>
                       <p className='font-medium'>เบีโทร: {order.delivery_address?.mobile}</p>
-                      <p className='font-medium'>วันที: {order.createdAt}</p>
+                      <p className='font-medium'>วันที: {new Date(order.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, '')}</p>
                       {/* <p className='font-medium'>{order.delivery_address.city}</p> */}
                     </div>
                     

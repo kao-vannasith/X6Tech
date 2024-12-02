@@ -90,7 +90,7 @@ const Home = () => {
         </p>
       </div>
       </div>
-          <div className={`w-full h-full min-h-48 bg-blue-100 rounded ${!banner && "animate-pulse my-2" } `}>
+          {/* <div className={`w-full h-full min-h-48 bg-blue-100 rounded ${!banner && "animate-pulse my-2" } `}> */}
               {/* <img
                 src={banner}
                 className='w-full h-full hidden lg:block'
@@ -101,7 +101,7 @@ const Home = () => {
                 className='w-full h-full lg:hidden'
                 alt='banner' 
               /> */}
-              <BarChart
+              {/* <BarChart
       series={[
         { data: [2, 2, 8] },
        
@@ -109,11 +109,11 @@ const Home = () => {
       height={290}
       xAxis={[{ data: ['Order Show', 'Company', 'Total Order'], scaleType: 'band' }]}
       margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
-    />
-          </div>
+    /> */}
+          {/* </div> */}
       </div>
       
-      <div className='container mx-auto px-4 my-2 grid grid-cols-5 md:grid-cols-8 lg:grid-cols-10  gap-2'>
+      {/* <div className='container mx-auto px-4 my-2 grid grid-cols-5 md:grid-cols-8 lg:grid-cols-10  gap-2'>
           {
             loadingCategory ? (
               new Array(12).fill(null).map((c,index)=>{
@@ -140,7 +140,7 @@ const Home = () => {
               
             )
           }
-      </div>
+      </div> */}
 
       {/***display category product */}
       {

@@ -90,10 +90,10 @@ const ProductListPage = () => {
                     <img
                       src={s.image}
                       alt='subCategory'
-                      className=' w-14 lg:h-14 lg:w-12 h-full object-scale-down'
+                      className=' w-24 lg:h-24 lg:w-12 h-full object-scale-down'
                     />
                   </div>
-                  <p className='-mt-6 lg:mt-0 text-xs text-center lg:text-left lg:text-base'>{s.name}</p>
+                  <p className='mt-0 lg:mt-0 text-xs text-center lg:text-left lg:text-base'>{s.name}</p>
                 </Link>
               )
             })

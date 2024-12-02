@@ -1,3 +1,4 @@
+// export const baseURL = "http://localhost:8080"
 export const baseURL = "http://167.172.68.250:8080"
 
 const SummaryApi = {
@@ -151,6 +152,10 @@ const SummaryApi = {
     },
     getOrderItems : {
         url : '/api/order/order-list',
+        method : 'get'
+    },
+    getOrderExcel : {
+        url : '/api/order/export-order',
         method : 'get'
     },
     getUserAll : {

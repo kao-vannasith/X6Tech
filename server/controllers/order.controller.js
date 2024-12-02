@@ -151,7 +151,7 @@ export async function webhookStripe(request,response){
     const event = request.body;
     const endPointSecret = process.env.STRIPE_ENPOINT_WEBHOOK_SECRET_KEY
 
-    console.log("event",event)
+    //.log("event",event)
 
     // Handle the event
   switch (event.type) {
@@ -170,7 +170,7 @@ export async function webhookStripe(request,response){
     
       const order = await OrderModel.insertMany(orderProduct)
 
-        console.log(order)
+        //.log(order)
         if(Boolean(order[0])){
             const removeCartItems = await  UserModel.findByIdAndUpdate(userId,{
                 shopping_cart : []
@@ -179,7 +179,7 @@ export async function webhookStripe(request,response){
         }
       break;
     default:
-      console.log(`Unhandled event type ${event.type}`);
+      //.log(`Unhandled event type ${event.type}`);
   }
 
   // Return a response to acknowledge receipt of the event
@@ -189,14 +189,17 @@ export async function webhookStripe(request,response){
 
 export async function getOrderDetailsController(request,response){
     try {
+        
         const userId = request.userId // order id
+        const user = await UserModel.findById(userId)
+        //console.log(request.userId)
         // let { search } = request.body
         // const query = search ? {
         //     $text : {
         //         $search : search
         //     }
         // } : {}
-        if(userId === '673d2ca8d62befa9aa08b44b'){
+        if(user.role === 'ADMIN'){
             const orderlist = await OrderModel.find().sort({ createdAt : -1 }).populate(['delivery_address','userId'])
         const count = await OrderModel.aggregate([
             {  $group: { 
@@ -217,11 +220,11 @@ export async function getOrderDetailsController(request,response){
             const ObjectId = mongoose.Types.ObjectId;
             const orderlist = await OrderModel.find({ userId : userId }).sort({ createdAt : -1 }).populate(['delivery_address','userId'])
         const count = await OrderModel.aggregate([
-            // {
-            //     $match: { _id: new ObjectId('673d3c39d62befa9aa08b7b0') }
-            //   },
+            {
+                $match: { userId: new ObjectId(userId) }
+              },
             {  $group: { 
-                _id: userId, 
+                _id: { userId : userId },
                 total: { 
                     $sum: "$totalAmt" 
                 } 
@@ -242,5 +245,60 @@ export async function getOrderDetailsController(request,response){
             error : true,
             success : false
         })
+    }
+}
+
+import excelJS from 'exceljs';
+import path from 'path'
+import os from 'os'; // Add the os module
+
+
+export async function exportOrder(request, response) {
+    try {
+        const orderlist = await OrderModel.find().sort({ createdAt: -1 }).populate(['delivery_address', 'userId']);
+        const workbook = new excelJS.Workbook();  // Create a new workbook
+        const worksheet = workbook.addWorksheet("My Order"); // New Worksheet
+        // Column for data in excel. key must match data key
+        worksheet.columns = [
+            { header: "O no.", key: "o_no", width: 10 },
+            { header: "จาก", key: "userId", width: 10 },
+            { header: "สินค้า", key: "product_details", width: 10 },
+            { header: "จำนวน", key: "subTotalAmt", width: 10 },
+            { header: "ราคา", key: "totalAmt", width: 10 },
+        ];
+
+        // Looping through User data
+        let counter = 1;
+        orderlist.forEach((order) => {
+            order.o_no = counter;
+            worksheet.addRow(order); // Add data in worksheet
+            counter++;
+        });
+
+        // Making first line in excel bold
+        worksheet.getRow(1).eachCell((cell) => {
+            cell.font = { bold: true };
+        });
+
+        // Use os module to get the user's home directory
+        const homeDir = os.homedir();
+        const filePath = path.join(homeDir, 'Downloads', 'orders.xlsx');
+
+        // Write the workbook to the file
+        await workbook.xlsx.writeFile(filePath)
+            .then(() => {
+                response.send({
+                    status: "success",
+                    message: "File successfully downloaded",
+                    path: filePath,
+                });
+            });
+
+    } catch (error) {
+        return response.status(500).json({
+            message: error.message || error,
+            error: true,
+            success: false
+        });
     }
 }
