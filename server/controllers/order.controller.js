@@ -189,18 +189,16 @@ export async function webhookStripe(request,response){
 
 export async function getOrderDetailsController(request,response){
     try {
-        
+        const { startDate, endDate, status } = request.query;
         const userId = request.userId // order id
         const user = await UserModel.findById(userId)
-        //console.log(request.userId)
-        // let { search } = request.body
-        // const query = search ? {
-        //     $text : {
-        //         $search : search
-        //     }
-        // } : {}
+        // const startDate = new Date('2024-11-01T00:00:00Z'); 
+        // const endDate = new Date('2024-12-30T23:59:59Z');
         if(user.role === 'ADMIN'){
-            const orderlist = await OrderModel.find().sort({ createdAt : -1 }).populate(['delivery_address','userId'])
+            const query = { createdAt: { $gte: new Date(startDate), $lt: new Date(endDate) },
+            payment_status: status
+        };
+            const orderlist = await OrderModel.find(query).sort({ createdAt : -1 }).populate(['delivery_address','userId']);
         const count = await OrderModel.aggregate([
             {  $group: { 
                 _id: null, 
@@ -217,8 +215,15 @@ export async function getOrderDetailsController(request,response){
             success : true
         })
         } else {
+            const query = {
+                userId: userId,
+                createdAt : {
+                  $gte: new Date(startDate),
+                  $lte: new Date(endDate),
+                },
+              };
             const ObjectId = mongoose.Types.ObjectId;
-            const orderlist = await OrderModel.find({ userId : userId }).sort({ createdAt : -1 }).populate(['delivery_address','userId'])
+            const orderlist = await OrderModel.find({ query }).sort({ createdAt : -1 }).populate(['delivery_address','userId'])
         const count = await OrderModel.aggregate([
             {
                 $match: { userId: new ObjectId(userId) }

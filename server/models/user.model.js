@@ -57,6 +57,12 @@ const userSchema = new mongoose.Schema({
             ref : 'order'
         }
     ],
+    company : [
+        {
+            type : mongoose.Schema.ObjectId,
+            ref : 'category'
+        }
+    ],
     forgot_password_otp : {
         type : String,
         default : null
@@ -67,7 +73,7 @@ const userSchema = new mongoose.Schema({
     },
     role : {
         type : String,
-        enum : ['ADMIN',"USER"],
+        enum : ['ADMIN',"USER","COMPANY"],
         default : "USER"
     }
 },{
